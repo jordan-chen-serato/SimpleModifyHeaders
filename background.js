@@ -15,6 +15,9 @@ let started = 'off';
 let debug_mode = false;
 const isChrome = (navigator.userAgent.toLowerCase().indexOf("chrome") !== -1);
 
+// Whether a default popup is set in the manifest (if false, clicking the icon toggles header modification)
+const popupsVisible = false;
+
 loadFromBrowserStorage(['config', 'started'], function (result) {
 
   // if old storage method
@@ -34,8 +37,18 @@ loadFromBrowserStorage(['config', 'started'], function (result) {
   }
   // listen for change in configuration or start/stop
   chrome.runtime.onMessage.addListener(notify);
+
+  // When the extension icon is clicked, toggle header modification
+  if (!popupsVisible) chrome.browserAction.onClicked.addListener(toggleHeaderModification);
 });
 
+function toggleHeaderModification() {
+  started = started === 'off' ? 'on' : 'off';
+  storeInBrowserStorage({ started: started }, function () {
+    console.log('Toggling header modification ' + started);
+    notify(started);
+  });
+}
 
 function loadConfigurationFromLocalStorage() {
   // if configuration exist 
