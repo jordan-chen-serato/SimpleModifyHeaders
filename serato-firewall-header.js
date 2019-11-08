@@ -54,7 +54,9 @@ class FirewallHeader {
    */
   replaceInvalidCharacters(headerHash) {
     for (let [original, replacement] of this.characterReplacements) {
-      headerHash = headerHash.replace(original, replacement)
+      const pattern = original.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+      const re = new RegExp(pattern, 'g') // Required for all instances to be replaced
+      headerHash = headerHash.replace(re, replacement)
     }
 
     return headerHash
