@@ -16,4 +16,18 @@ describe('FirewallHeader', () => {
       expect(headerValue).toEqual(headerValue2)
     })
   })
+
+  describe('#function replaceInvalidCharacters', () => {
+    it('replaces \\ characters in the hash', () => {
+      const firewallHeader = new FirewallHeader()
+      const newHeaderValue = firewallHeader.replaceInvalidCharacters('\\\\\\')
+      expect(newHeaderValue).toEqual('yyy')
+    })
+
+    it('replaces " characters in the hash', () => {
+      const firewallHeader = new FirewallHeader()
+      const newHeaderValue = firewallHeader.replaceInvalidCharacters('"""')
+      expect(newHeaderValue).toEqual('xxx')
+    })
+  })
 })
