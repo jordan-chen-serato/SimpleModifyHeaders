@@ -75,10 +75,8 @@ function loadConfigurationFromLocalStorage() {
     }
     //else no config exists, create a default one
     else {
-      console.log("Load default config");
-      let headers = [];
-      headers.push({ url_contains: "", action: "add", header_name: "test-header-name", header_value: "test-header-value", comment: "test", apply_on: "req", status: "on" });
-      config = { format_version: "1.1", target_page: "https://httpbin.org/*", headers: headers, debug_mode: false, use_url_contains: false };
+      console.log("Load default Serato config");
+      config = getDefaultSeratoFirewallConfig();
     }
   }
   storeInBrowserStorage({ config: JSON.stringify(config) });
@@ -86,8 +84,29 @@ function loadConfigurationFromLocalStorage() {
   if (started !== undefined) storeInBrowserStorage({ started: started });
 }
 
-
-
+/*
+* Returns a default configuration object that sets the Serato Firewall header for test environments
+*
+*/
+function getDefaultSeratoFirewallConfig() {
+  const seratoFirewallHeaderValue = generateSeratoFirewallHeaderValue();
+  return {
+    "format_version": "1.2",
+    "target_page": "*://*.serato.net/*;*://*.serato.biz/*;*://*.serato.xyz/*",
+    "headers": [{
+      "url_contains": "",
+      "action": "add",
+      "header_name": "x-serato-firewall",
+      "header_value": seratoFirewallHeaderValue,
+      "comment": "",
+      "apply_on": "req",
+      "status": "on"
+    }],
+    "debug_mode": false,
+    "show_comments": false,
+    "use_url_contains": false
+  };
+}
 
 function loadFromBrowserStorage(item, callback_function) {
   chrome.storage.local.get(item, callback_function);
@@ -105,6 +124,40 @@ function storeInBrowserStorage(item, callback_function) {
 
 function log(message) {
   console.log(new Date() + " SimpleModifyHeader : " + message);
+}
+
+/*
+* Update the configured Serato Firewall header with a newly generated value
+*
+*/
+function updateSeratoFirewallHeader() {
+  // Generate new values for the x-serato-firewall header, if it exists in config
+  config.headers.filter(function(header) {
+    return header.header_name.toLowerCase() === 'x-serato-firewall';
+  }).map(function(header) {
+    setSeratoFirewallHeaderValue(header);
+  });
+
+  storeInBrowserStorage({ config: JSON.stringify(config) });
+}
+
+/*
+* Set the x-serato-firewall header to a new value in a header configuration object
+*
+*/
+function setSeratoFirewallHeaderValue(header) {
+  const newFirewallHeaderValue = generateSeratoFirewallHeaderValue();
+  if (config.debug_mode) log("Setting Serato Firewall header to " + newFirewallHeaderValue);
+  header.header_value = newFirewallHeaderValue;
+}
+
+/*
+* Generate a new Serato Firewall header value
+*
+*/
+function generateSeratoFirewallHeaderValue() {
+  const firewallHeader = new FirewallHeader();
+  return firewallHeader.getHeaderValue();
 }
 
 /*
@@ -233,6 +286,10 @@ function addListener() {
 
   // need to had "extraHeaders" option for chrome https://developer.chrome.com/extensions/webRequest#life_cycle_footnote
   if (isChrome) {
+    chrome.webRequest.onBeforeSendHeaders.addListener(updateSeratoFirewallHeader,
+      { urls: target.split(";") },
+      ["blocking", "requestHeaders", "extraHeaders"]);
+
     chrome.webRequest.onBeforeSendHeaders.addListener(rewriteRequestHeader,
       { urls: target.split(";") },
       ["blocking", "requestHeaders", "extraHeaders"]);
@@ -243,6 +300,9 @@ function addListener() {
   }
 
   else {
+    chrome.webRequest.onBeforeSendHeaders.addListener(updateSeratoFirewallHeader,
+      { urls: target.split(";") },
+      ["blocking", "requestHeaders"]);
     chrome.webRequest.onBeforeSendHeaders.addListener(rewriteRequestHeader,
       { urls: target.split(";") },
       ["blocking", "requestHeaders"]);
