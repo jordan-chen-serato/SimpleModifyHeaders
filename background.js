@@ -29,7 +29,7 @@ loadFromBrowserStorage(['config', 'started'], function (result) {
 
   if (started === 'on') {
     addListener();
-    chrome.browserAction.setIcon({ path: 'icons/modify-green-32.png' });
+    chrome.browserAction.setIcon({ path: 'icons/start.png' });
   }
   else if (started !== 'off') {
     started = 'off';
@@ -276,13 +276,13 @@ function notify(message) {
   }
   else if (message === "off") {
     removeListener();
-    chrome.browserAction.setIcon({ path: "icons/modify-32.png" });
+    chrome.browserAction.setIcon({ path: "icons/stop.png" });
     started = "off";
     if (config.debug_mode) log("Stop modifying headers");
   }
   else if (message === "on") {
     addListener();
-    chrome.browserAction.setIcon({ path: "icons/modify-green-32.png" });
+    chrome.browserAction.setIcon({ path: "icons/start.png" });
     started = "on";
     if (config.debug_mode) log("Start modifying headers");
   }

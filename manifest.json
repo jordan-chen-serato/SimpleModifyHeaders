@@ -5,7 +5,7 @@
   "version": "1.6.7",
   "homepage_url": "https://github.com/harrietrc/SimpleModifyHeaders",
   "icons": {
-    "48": "icons/modify-48.png"
+    "48": "icons/stop.png"
   },
   "permissions": [
     "activeTab",
@@ -23,7 +23,7 @@
     ]
   },
   "browser_action": {
-    "default_icon": "icons/modify-32.png",
+    "default_icon": "icons/stop.png",
     "default_title": "Simple Modify Headers"
   },
   "applications": {
