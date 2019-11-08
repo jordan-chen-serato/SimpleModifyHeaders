@@ -11,10 +11,7 @@ let show_comments;
 let use_url_contains;
 let input_field_style;
 
-
-window.onload = function() {
-   initConfigurationPage();
- }
+window.onload = initConfigurationPage;
 
 function initConfigurationPage() {
 	initGlobalValue();
@@ -64,7 +61,6 @@ function initGlobalValue()
   input_field_style="form_control input_field_small";
  }
 
-
 function loadFromBrowserStorage(item,callback_function) {
   chrome.storage.local.get(item, callback_function);
 }
@@ -90,14 +86,12 @@ function hideParametersScreen() {
 }
 
 function showCommentsClick() {
-  if (document.getElementById('show_comments').checked) show_comments = true;
-  else show_comments = false;
+  show_comments = document.getElementById('show_comments').checked;
   reshapeTable();
 }
 
 function useUrlContainsClick() {
-  if (document.getElementById('use_url_contains').checked) use_url_contains = true;
-  else use_url_contains = false;
+  use_url_contains = document.getElementById('use_url_contains').checked;
   reshapeTable();
 }
 
