@@ -1,8 +1,8 @@
 {
-  "description": "Simple Modify headers ",
+  "description": "Serato Firewall Header",
   "manifest_version": 2,
-  "name": "simple-modify-headers",
-  "version": "1.6.7",
+  "name": "serato-firewall-header",
+  "version": "1.6.8",
   "homepage_url": "https://github.com/harrietrc/SimpleModifyHeaders",
   "icons": {
     "48": "icons/stop.png"
@@ -28,7 +28,7 @@
   },
   "applications": {
     "gecko": {
-      "id": "{f6ca2dfb-43a6-4334-9fad-8d5a71a1fe67}",
+      "id": "{95c37502-8b73-4307-a476-95cea21e8c9b}",
       "strict_min_version": "42.0"
     }
   }
