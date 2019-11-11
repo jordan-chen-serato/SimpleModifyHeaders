@@ -169,7 +169,7 @@ function setSeratoFirewallHeaderValue(header) {
 *
 */
 function generateSeratoFirewallHeaderValue() {
-  const firewallHeader = new FirewallHeader();
+  const firewallHeader = new Serato.FirewallHeader();
   return firewallHeader.getHeaderValue();
 }
 

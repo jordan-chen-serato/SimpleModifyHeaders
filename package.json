@@ -1,0 +1,16 @@
+{
+  "name": "serato-firewall-header",
+  "version": "1.7.0",
+  "devDependencies": {
+    "@babel/core": "^7.7.0",
+    "@babel/preset-env": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.4.0",
+    "webpack-cli": "^3.3.10"
+  },
+  "scripts": {
+    "build:firefox": "webpack",
+    "build:chrome": "webpack",
+    "sign:firefox": ""
+  }
+}

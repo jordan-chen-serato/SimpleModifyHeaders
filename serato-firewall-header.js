@@ -1,14 +1,14 @@
 // Note that unlike the rest of this project, this file contains ES6 (but that should be fine for the versions of FF and
 // Chrome that the team uses, even without transpilation)
 
-class FirewallHeader {
-  shifts = [-8, 8, -16, 16]
-  prefixCharacters = 'serato'
+import md5 from'./lib/js-md5/js/md5.js' // Note that this will violate CORS policy if we don't run this file through a bundler
 
-  // For reference and testing
-  headerPattern = '"[serato]{3}~[(-1Y-\\[\\]^y]{8}[8-Ai-n]{8}[ -!#-)Q-Vx]{8}[@-Iq-v]{8}"'
+export class FirewallHeader {
 
   constructor() {
+    this.headerPattern = '"[serato]{3}~[(-1Y-\\[\\]^y]{8}[8-Ai-n]{8}[ -!#-)Q-Vx]{8}[@-Iq-v]{8}"'
+    this.shifts = [-8, 8, -16, 16]
+    this.prefixCharacters = 'serato'
     this.prefix = shuffleString(this.prefixCharacters).substr(0, 3)
     this.timestamp = (new Date()).toISOString() // Close enough to 'Y-m-d\TH:i:sP' (PHP SDK implementation)
     this.characterReplacements = new Map([['"', 'x'], ['\\', 'y']])

@@ -2,7 +2,7 @@
   "description": "Serato Firewall Header",
   "manifest_version": 2,
   "name": "serato-firewall-header",
-  "version": "1.6.8",
+  "version": "1.7.0",
   "homepage_url": "https://github.com/harrietrc/SimpleModifyHeaders",
   "icons": {
     "48": "icons/stop.png"
@@ -17,8 +17,7 @@
   ],
   "background": {
     "scripts": [
-      "lib/js-md5/js/md5.min.js",
-      "serato-firewall-header.js",
+      "dist/serato-firewall-header.bundle.js",
       "background.js"
     ]
   },
