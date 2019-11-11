@@ -1,6 +1,6 @@
 {
   "name": "serato-firewall-header",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "devDependencies": {
     "@babel/core": "^7.7.0",
     "@babel/preset-env": "^7.7.0",
@@ -17,6 +17,7 @@
     "sign:firefox": "webpack --env.browser=firefox && web-ext sign --api-key $WEB_EXT_API_KEY --api-secret $WEB_EXT_API_SECRET --channel unlisted --ignore-files 'tests/*' 'tests' 'serato-firewall-header.js' 'web-ext-artifacts' 'web-ext-artifacts/*' 'package.json' 'node_modules' 'node_modules/*' 'manifests' 'manifests/*' 'lib' 'lib/*'",
     "lint": "web-ext lint",
     "test": "open ./tests/SpecRunner.html # Note: these scripts won't return a non-zero error code on test failure",
-    "test:windows": "start ./tests/SpecRunner.html"
+    "test:windows": "start ./tests/SpecRunner.html",
+    "package:chrome": "webpack --env.browser=chrome && web-ext build --ignore-files 'tests/*' 'tests' 'serato-firewall-header.js' 'web-ext-artifacts' 'web-ext-artifacts/*' 'package.json' 'node_modules' 'node_modules/*' 'manifests' 'manifests/*' 'lib' 'lib/*'"
   }
 }
