@@ -2,10 +2,9 @@
   "description": "Serato Firewall Header",
   "manifest_version": 2,
   "name": "serato-firewall-header",
-  "version": "1.7.0",
   "homepage_url": "https://github.com/harrietrc/SimpleModifyHeaders",
   "icons": {
-    "48": "icons/stop.png"
+    "40": "icons/stop.png"
   },
   "permissions": [
     "activeTab",
