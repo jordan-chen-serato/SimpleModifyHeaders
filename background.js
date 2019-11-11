@@ -18,6 +18,8 @@ const isChrome = (navigator.userAgent.toLowerCase().indexOf("chrome") !== -1);
 // Whether a default popup is set in the manifest (if false, clicking the icon toggles header modification)
 const popupsVisible = false;
 
+const FirewallHeader = Serato.FirewallHeader
+
 loadFromBrowserStorage(['config', 'started'], function (result) {
 
   // if old storage method
@@ -169,7 +171,7 @@ function setSeratoFirewallHeaderValue(header) {
 *
 */
 function generateSeratoFirewallHeaderValue() {
-  const firewallHeader = new Serato.FirewallHeader();
+  const firewallHeader = new FirewallHeader();
   return firewallHeader.getHeaderValue();
 }
 
