@@ -1,2 +1,7 @@
 .scannerwork
 .idea/
+node_modules/
+web-ext-artifacts/
+dist/
+manifest.json
+.web-extension-id
