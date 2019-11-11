@@ -1,4 +1,26 @@
-# SimpleModifyHeaders V 1.6
+# Serato Firewall Header extension
+
+Extension for Firefox and Chrome. Extends didierfred's SimpleModifyHeaders for internal use at Serato, allowing testers and developers to bypass the WAF when using a VPN.
+
+## Installing dependencies
+
+* Run `npm install`
+
+## NPM scripts:
+
+* `build:firefox`: Bundles and minifies the ES6 code (currently only serato-firewall-header.js), and creates a Firefox-specific manifest.json
+* `build:chrome`: Bundles and minifies the ES6 code, and creates a Chrome-specific manifest.json
+* `sign:firefox`: Executes the Firefox build process and then sends the add-on to Mozilla to sign as an unlisted add-on. If successful, an .xpi file will be downloaded to the web-ext-artifacts directory
+* `lint`: Runs `web-ext lint`
+* `test`: In Linux and MacOS, opens the Jasmine SpecRunner page, which executes the tests and displays their results. Doesn't actually return a non-zero exist code on test error/failure
+* `test:windows`: Opens the Jasmine SpecRunner page in Windows
+* `package:chrome`: Builds for Chrome, then zips the extension. Directories/files such as node_modules are excluded as they are either redundant or can cause errors and warnings when the extension is installed
+
+## Further help and documentation
+
+* See http://confluence.akld.serato.net:8090/x/XJSBBQ
+
+# Forked from SimpleModifyHeaders V 1.6
 
 Extension for firefox and chrome. (The extension can be install via [this link](https://addons.mozilla.org/fr/firefox/addon/simple-modify-header/) for firefox and via [this link](https://chrome.google.com/webstore/detail/simple-modify-headers/gjgiipmpldkpbdfjkgofildhapegmmic) for chrome)
 
