@@ -16,6 +16,11 @@ Extension for Firefox and Chrome. Extends didierfred's SimpleModifyHeaders for i
 * `test:windows`: Opens the Jasmine SpecRunner page in Windows
 * `package:chrome`: Builds for Chrome, then zips the extension. Directories/files such as node_modules are excluded as they are either redundant or can cause errors and warnings when the extension is installed
 
+## Issues with web-ext build (and others)
+
+* There's [a bug](https://github.com/yargs/yargs/issues/873) in the dependency web-ext uses for argument parsing where, if certain environment variables exist, the library will attempt to read them as arguments and so throw an error.
+* Unfortunately, resolving this requires executing `unset WEB_EXT_API_KEY; unset WEB_EXT_API_SECRET` to unset the offending environment variables between runs of `sign:firefox` and other NPM scripts that use web-ext.
+
 ## Further help and documentation
 
 * See http://confluence.akld.serato.net:8090/x/XJSBBQ
