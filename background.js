@@ -11,7 +11,7 @@
 "use strict";
 
 let config;
-let started = 'off';
+let started = 'on';
 let debug_mode = false;
 const isChrome = (navigator.userAgent.toLowerCase().indexOf("chrome") !== -1);
 

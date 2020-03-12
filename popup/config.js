@@ -55,7 +55,7 @@ function initConfigurationPage() {
 function initGlobalValue()
  {
   line_number = 1;
-  started = "off";
+  started = "on";
   show_comments = true;
   use_url_contains = false;
   input_field_style="form_control input_field_small";

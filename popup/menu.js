@@ -5,7 +5,7 @@
  * @author didierfred@gmail.com
  */
 
-var started = "off";
+var started = "on";
 
 window.onload = function() {
   document.getElementById('config').addEventListener('click',function (e) {start_config();});
