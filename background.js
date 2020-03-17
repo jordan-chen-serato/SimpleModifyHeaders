@@ -25,7 +25,7 @@ loadFromBrowserStorage(['config', 'started'], function (result) {
   // if old storage method
   if (result.config === undefined) loadConfigurationFromLocalStorage();
   else {
-    started = result.started;
+    started = "on";
     config = JSON.parse(result.config);
   }
 
@@ -95,7 +95,7 @@ function loadConfigurationFromLocalStorage() {
     }
   }
   storeInBrowserStorage({ config: JSON.stringify(config) });
-  started = localStorage.getItem('started');
+  started = "on";
   if (started !== undefined) storeInBrowserStorage({ started: started });
 }
 

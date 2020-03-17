@@ -11,7 +11,7 @@ window.onload = function() {
   document.getElementById('config').addEventListener('click',function (e) {start_config();});
   document.getElementById('start_stop').addEventListener('click',function (e) {start_modify();});
   loadFromBrowserStorage(['started'],function(result) {
-    started =result.started;
+    started = "on";
     if (started==="on") document.getElementById("start_stop").value = "Stop";
   });
 }

@@ -42,7 +42,7 @@ function initConfigurationPage() {
 	  document.getElementById('exit_parameters_screen_button').addEventListener('click',function (e) {hideParametersScreen();});
 
           loadFromBrowserStorage(['started'], function (result) {
-	    started = result.started;
+	    started = "on";
 	    if (started==="on") document.getElementById("start_img").src = "img/stop.png";
           });
 
